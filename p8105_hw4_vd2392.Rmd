@@ -1,0 +1,37 @@
+---
+title: "p8105_hw4_vd2392"
+output: github_document
+---
+
+## Setup
+
+##### General
+```{r general_setup}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  include = TRUE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+##### Visualizations
+```{r visualiztion_setup}
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+```
+
+##### Installations
+```{r installations}
+library(tidyverse)
+library(ggridges)
+library(patchwork)
+library(readxl)
+```
+
+---
+
+## Problem 1
