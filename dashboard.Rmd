@@ -1,0 +1,114 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: readable
+    navbar:
+      - { title: "Home", href: index.html, align: left }
+      - { title: "About", href: about.html, align: left }
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+```
+
+
+```{r}
+data(instacart)
+
+orders_data = 
+  instacart %>% 
+  sample_n(1000) %>% 
+  select(everything()) %>% 
+  mutate(
+    department = as.factor(department),
+    order_id = as.factor(order_id)
+  )
+
+```
+
+
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+
+```{r}
+orders_data %>% 
+  select(
+    department, order_id
+  ) %>% 
+  group_by(department) %>%
+  summarize(
+    count = n_distinct(order_id)
+  ) %>% plot_ly(., labels = ~department, values = ~count, type = 'pie') %>% 
+  layout(title = 'asdas',
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+```
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+instacart %>% 
+  sample_n(1000) %>% 
+  select(order_id, product_id, product_name, department_id, department, order_dow) %>% 
+  mutate(
+    department = as.factor(department),
+    order_id = as.factor(order_id)
+  ) %>% 
+  select(
+    order_dow, order_id, product_id
+  ) %>% 
+  group_by(order_dow, order_id) %>%   
+  summarize(
+    products_per_order = n()
+  ) %>% 
+  summarize (
+    orders = n(),
+    min = min(products_per_order),
+    q1 = quantile(products_per_order, 0.25),
+    mean = mean(products_per_order),
+    q3 = quantile(products_per_order, 0.75),
+    max = max(products_per_order)
+  ) %>% 
+  mutate(
+    order_dow = as.factor(order_dow)
+  )%>% 
+  plot_ly(x = ~order_dow, y = ~orders, color = ~order_dow, type = "bar", colors = "viridis")
+
+```
+
+### Chart C
+
+```{r}
+orders_data %>%
+  select(department, order_dow, product_name) %>% 
+  mutate(
+    order_dow = as.factor(order_dow)
+  ) %>% 
+  group_by(order_dow, department) %>% 
+  summarize(
+    products = n()
+  ) %>% plot_ly(
+    x = ~department, y = ~order_dow,
+    z = ~products, type = "heatmap"
+)
+```
+
+
+
