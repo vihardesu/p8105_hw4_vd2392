@@ -4,10 +4,11 @@ title: "Resume"
 ### About Me
 
 ---
+
 [Pomerium](https://www.pomerium.com/)
 I'm a software engineer developing an enterprise console for their core product - an access-control proxy for configurable authentication and authorization policy for enterprise software infrastructure.
 
-Columbia University
+[Columbia University](https://www.publichealth.columbia.edu/)
 I'm currently studying pharmaceutical statistics and genetics at Columbia.
 
 [Vectorspace AI](https://vectorspace.ai/)
@@ -17,16 +18,16 @@ I worked on context-controlled natural language models the year after undergrad.
 I graduated undergrad from Washington University in St. Louis, where I studied Computer Science, Bioinformatics & Finance.
 
 [Raymond James](https://www.raymondjames.com/)
-@Raymond James, I worked as an investment banking summer analyst. I worked on 1 M&A, 1 IPO, and 2 Follow-On Offerings for immunotherapy and gene therapy companies.
+At Raymond James, I worked as an investment banking summer analyst. I worked on 1 M&A, 1 IPO, and 2 Follow-On Offerings for immunotherapy and gene therapy companies.
 
 [The Silva Lab](https://silvalab.bme.wustl.edu/new-therapeutic-approaches/)
-@The Silva Lab I parallelized a Matlab model of heart-cell tissue to reduce the model's run-time complexity. I did so by converting Matlab scripts into C++ scripts to develop a high precision implementation of atrial fibrillation. The model mapped heart arrythmia to ion gradient patterns in heart tissue thru ~137 differential equations.
+At the Silva Lab I parallelized a Matlab model of heart-cell tissue to reduce the model's run-time complexity. I did so by converting Matlab scripts into C++ scripts to develop a high precision implementation of atrial fibrillation. The model mapped heart arrythmia to ion gradient patterns in heart tissue thru ~137 differential equations.
 
 [Bear Cuts](https://www.youtube.com/watch?v=zlnJTrDgeHQ)
 In undergrad, I founded a full-service salon & barbershop named Bear Cuts that earned ~$76,000 in revenue the first year it opened, FY 2017. Upon graduating in 2019, my co-founders and I sold Bear Cuts to new ownership
 
 [Adarza](https://www.genomeweb.com/business-news/adarza-biosystems-raises-25-million-series-d-funding-round)
-As a software engineer @Adarza, I developed a computer vision model in TensorFlow to label circumferences of microwells arranged in 20x20 matrices on immunoassay chips. I was able to improve the detection accuracy by ~18% (From ~80% to ~98%)
+As a software engineer at Adarza, I developed a computer vision model in TensorFlow to label circumferences of microwells arranged in 20x20 matrices on immunoassay chips. I was able to improve the detection accuracy by ~18% (From ~80% to ~98%)
 
 [Terra Venture Partners](http://www.terravp.com/)
 In the summer of 2016, I worked at Terra Venture Partners, an early-stage invesment firm in Israel.

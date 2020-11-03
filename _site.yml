@@ -3,11 +3,16 @@ output_dir: "."
 navbar:
   title: "Vihar Desu"
   right:
-    - text: "About"
+    - text: "About Me"
       href: about.html
     - icon: fa-envelope fa-lg
       href: mailto:<vihar.desu@columbia.edu>
     - icon: fa-github fa-lg
       href: http://github.com/vihardesu/
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/vihar-desu/
+    - icon: fa-medium fa-lg
+      href: https://medium.com/@vihardesu
 output:
-  html_document
+  html_document:
+    theme: readable
