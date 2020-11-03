@@ -13,4 +13,4 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: website_template
+WebsitePath: ~/Documents/Github/Columbia/Data_Science_1/p8105_hw4_vd2392
