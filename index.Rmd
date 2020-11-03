@@ -1,7 +1,6 @@
 ---
-title: "Holy cow!"
+title: "Vihar Desu"
 ---
 
-### I have a webpage!
-
-And I can put all kinds of stuff on it!
+### Hi, I'm Vihar.
+I'm currently studying pharmaceutical statistics and/or genetics at Columbia and working at a start-up called Pomerium. You can find my real personal website built in React JS, [here](https://www.vihardesu.com/). You can learn more about me on my [LinkedIn](https://www.linkedin.com/in/vihar-desu/) or read my blog at [Medium](https://medium.com/@vihardesu)!

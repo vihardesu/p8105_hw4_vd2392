@@ -1,13 +1,13 @@
-name: "Yay internet!"
+name: "Vihar Desu"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Vihar Desu"
   right:
     - text: "About"
       href: about.html
     - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
+      href: mailto:<vihar.desu@columbia.edu>
     - icon: fa-github fa-lg
-      href: http://github.com/<YOUR_GH_NAME>/
+      href: http://github.com/vihardesu/
 output:
   html_document
