@@ -10,74 +10,83 @@ output:
       - { title: "About", href: about.html, align: left }
 ---
 
-```{r setup, include=FALSE}
+```{r installations, include=FALSE}
 library(tidyverse)
 library(p8105.datasets)
 library(plotly)
 library(flexdashboard)
 ```
 
-
-```{r}
+```{r instacart, include=FALSE}
 data(instacart)
 
-orders_data = 
-  instacart %>% 
-  sample_n(1000) %>% 
-  select(everything()) %>% 
-  mutate(
-    department = as.factor(department),
-    order_id = as.factor(order_id)
-  )
-
+orders_data =
+  instacart %>%
+  sample_n(1000) %>%
+  select(everything()) %>%
+  mutate(department = as.factor(department),
+         order_id = as.factor(order_id))
 ```
-
-
-
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
-
-
-```{r}
-orders_data %>% 
-  select(
-    department, order_id
-  ) %>% 
+### Distribution of Department Categories in All Orders
+```{r department_distributions}
+orders_data %>%
+  select(department, order_id) %>%
   group_by(department) %>%
-  summarize(
-    count = n_distinct(order_id)
-  ) %>% plot_ly(., labels = ~department, values = ~count, type = 'pie') %>% 
-  layout(title = 'asdas',
-         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
-
+  summarize(count = n_distinct(order_id)) %>% plot_ly(
+    .,
+    labels = ~ department,
+    values = ~ count,
+    type = 'pie',
+    textinfo = 'label+percent'
+  ) %>%
+  layout(
+    title = 'Orders with Department / Total Orders',
+    xaxis = list(
+      showgrid = FALSE,
+      zeroline = FALSE,
+      showticklabels = FALSE
+    ),
+    yaxis = list(
+      showgrid = FALSE,
+      zeroline = FALSE,
+      showticklabels = FALSE
+    )
+  )
 ```
-
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
-
-```{r}
-
-instacart %>% 
-  sample_n(1000) %>% 
-  select(order_id, product_id, product_name, department_id, department, order_dow) %>% 
+### Order Volume by Day of Week
+```{r dow_distribution}
+instacart %>%
+  sample_n(1000) %>%
+  select(order_id,
+         product_id,
+         product_name,
+         department_id,
+         department,
+         order_dow) %>%
   mutate(
     department = as.factor(department),
-    order_id = as.factor(order_id)
-  ) %>% 
-  select(
-    order_dow, order_id, product_id
-  ) %>% 
-  group_by(order_dow, order_id) %>%   
-  summarize(
-    products_per_order = n()
-  ) %>% 
+    order_id = as.factor(order_id),
+    order_dow = case_when(
+      order_dow == 0 ~ "Sunday",
+      order_dow == 1 ~ "Monday",
+      order_dow == 2 ~ "Tuesday",
+      order_dow == 3 ~ "Wednesday",
+      order_dow == 4 ~ "Thursday",
+      order_dow == 5 ~ "Friday",
+      order_dow == 6 ~ "Saturday"
+    )
+  ) %>%
+  select(order_dow, order_id, product_id) %>%
+  group_by(order_dow, order_id) %>%
+  summarize(products_per_order = n()) %>%
   summarize (
     orders = n(),
     min = min(products_per_order),
@@ -85,29 +94,56 @@ instacart %>%
     mean = mean(products_per_order),
     q3 = quantile(products_per_order, 0.75),
     max = max(products_per_order)
-  ) %>% 
+  ) %>%
   mutate(
-    order_dow = as.factor(order_dow)
-  )%>% 
-  plot_ly(x = ~order_dow, y = ~orders, color = ~order_dow, type = "bar", colors = "viridis")
-
+    order_dow = fct_reorder(order_dow, orders)
+  ) %>%
+  plot_ly(
+    x = ~ order_dow,
+    y = ~ orders,
+    color = ~ order_dow,
+    type = "bar",
+    colors = "viridis"
+  ) %>%
+  layout(xaxis = list(title = "", tickangle = -90))
 ```
 
-### Chart C
-
-```{r}
-orders_data %>%
-  select(department, order_dow, product_name) %>% 
-  mutate(
-    order_dow = as.factor(order_dow)
-  ) %>% 
-  group_by(order_dow, department) %>% 
-  summarize(
-    products = n()
-  ) %>% plot_ly(
-    x = ~department, y = ~order_dow,
-    z = ~products, type = "heatmap"
+### Count of Products Ordered by Department
+```{r heatmap}
+xaxis <- list(
+  title = "Department",
+  showticklabels = TRUE,
+  tickangle = 45,
+  exponentformat = "E"
 )
+
+yaxis <- list(
+  title = "Day of Week",
+  showticklabels = TRUE,
+  exponentformat = "E"
+)
+
+orders_data %>%
+  select(department, order_dow, product_name) %>%
+  mutate(
+    order_dow = case_when(
+      order_dow == 0 ~ "Sunday",
+      order_dow == 1 ~ "Monday",
+      order_dow == 2 ~ "Tuesday",
+      order_dow == 3 ~ "Wednesday",
+      order_dow == 4 ~ "Thursday",
+      order_dow == 5 ~ "Friday",
+      order_dow == 6 ~ "Saturday"
+    )
+  ) %>%
+  group_by(order_dow, department) %>%
+  summarize(Count = n()) %>% plot_ly(
+    x = ~ department,
+    y = ~ order_dow,
+    z = ~ Count,
+    type = "heatmap"
+  ) %>% 
+  layout(xaxis = xaxis, yaxis = yaxis)
 ```
 
 
